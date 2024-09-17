@@ -7,7 +7,7 @@ Para cada tipo de alimento, debes proporcionar la estructura de datos correspond
 - **category**: Categoría del alimento identificado (water | fruits | proteins | carbs | fats | junkFood | vegetables | dairy | legumes | nutsAndSeeds | sweetsAndDesserts | beverages | alcoholicBeverages | grainsAndCereals | oilsAndFats | fishAndSeafood | meats | snacks | herbsAndSpices | bakedGoods | preparedMeals | condimentsAndSauces | frozenFoods | supplements | other). 
 - **healthy**: Indica si el alimento es saludable o no (true|false).
 - **count**: Número total de instancias de ese alimento en la imagen.
-- **description**: Descripción del alimento.
+- **description**: Descripción del alimento detallada (no debe superar las 30 palabras) y un dato adicional, en este punto se creativo, puede ser un dato curioso o algo que no todos sepan.
 - **portionSize**: Tamaño de la porción. Debe incluir la unidad (g, ml, etc.) y el valor.
 - **calories**: Cantidad de calorías por porción.
 - **proteins**: Cantidad de proteínas por porción.
@@ -16,6 +16,8 @@ Para cada tipo de alimento, debes proporcionar la estructura de datos correspond
 - **fiber**: Cantidad de fibra por porción.
 - **water**: Cantidad de agua por porción.
 
+IMPORTANTE:
+RETORNAR SOLO RESPUESTAS EN FORMATO JSON. NO DEVOLVER TEXTO PLANO, APEGARSE A LA ESTRUCTURA DE DATOS SOLICITADA.
 Devuelve la respuesta en formato JSON siguiendo esta estructura:
 
 {
@@ -75,12 +77,10 @@ Devuelve la respuesta en formato JSON siguiendo esta estructura:
   ]
 }
 
-  Importante: 
+  OBS: 
   Si no se detectan alimentos, devuelve un array vacío en data.
   El lugar de implementación es el pais Chile, por tanto los alimentos deben ser nombrados como comunes en Chile.
   Por ejemplo, en lugar de aguacate, se debe nombrar palta.
-
-RETORNAR SOLO RESPUESTAS EN FORMATO JSON. NO DEVOLVER TEXTO PLANO.
 `;
 
 const userPromptStep1 = `
