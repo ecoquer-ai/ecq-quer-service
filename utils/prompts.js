@@ -18,7 +18,7 @@ Para cada tipo de alimento, debes proporcionar la estructura de datos correspond
 
 IMPORTANTE:
 RETORNAR SOLO RESPUESTAS EN FORMATO JSON. NO DEVOLVER TEXTO PLANO, APEGARSE A LA ESTRUCTURA DE DATOS SOLICITADA.
-SI IDENTIFICAS UN ALIMENTO SIEMPRE DEBES ENVIAR SU INFORMACIÓN NUTRICIONAL, AUNQUE SEA UNA INSTANCIA.
+SI IDENTIFICAS UN ALIMENTO SIEMPRE DEBES ENVIAR SU INFORMACIÓN NUTRICIONAL.
 Devuelve la respuesta en formato JSON siguiendo esta estructura:
 
 {
@@ -56,23 +56,6 @@ Devuelve la respuesta en formato JSON siguiendo esta estructura:
       "carbs": 0,
       "fats": 3.6,
       "fiber": 0,
-      "water": 0,
-    },
-    {
-      "category": "vegetables",
-      "name": "Lechuga",
-      "healthy": true,
-      "count": 2,
-      "description": "Lechuga",
-      "portionSize": {
-        "unit": "g",
-        "value": 50
-      },
-      "calories": 5,
-      "proteins": 0.5,
-      "carbs": 1,
-      "fats": 0,
-      "fiber": 0.5,
       "water": 0,
     },
   ]
