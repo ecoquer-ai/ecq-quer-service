@@ -5,6 +5,10 @@ const { handleRoutineGenerator } = require("./handleRoutineGenerator");
 const { handleVisionExperts } = require("./handleVisionExperts");
 const { handleNewMessage } = require("./handleNewMessage");
 const {
+  handleValidationAndRefinement,
+} = require("./handleValidationAndRefinement");
+const { handleOrchestrator } = require("./handleOrchestrator");
+const {
   handleNutritionPlanGenerator,
 } = require("./handleNutritionPlanGenerator");
 const {
@@ -15,6 +19,8 @@ const {
 } = require("./nutrition/handleNutritionistExpertLvl2");
 
 module.exports = {
+  handleValidationAndRefinement,
+  handleOrchestrator,
   handleNewMessage,
   handleVisionExperts,
   handleCreateAssistant,

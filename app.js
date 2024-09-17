@@ -11,6 +11,8 @@ const {
 const {
   handleNewMessage,
   handleVisionExperts,
+  handleValidationAndRefinement,
+  handleOrchestrator,
   handleCreateAssistant,
   handleClassifyQuestion,
   handleNutritionistExpert,
@@ -138,51 +140,22 @@ io.on("connection", (socket) => {
 
   socket.on("camera", async ({ base64Image }) => {
     console.time("socket.on camera");
-    console.log("Datos de cámara recibidos del cliente base64Image", {
-      base64Image: base64Image.slice(0, 30),
-    });
+    console.log(
+      "Datos de cámara recibidos del cliente",
+      base64Image.slice(0, 50)
+    );
 
     try {
-      // Enviar mensaje al LLM y obtener respuesta
-      response = await handleVisionExperts(base64Image);
-      console.log("handleVisionExperts, response", response);
+      // Paso 1: Detección Inicial
+      const handleVisionExpertsRes = await handleVisionExperts(base64Image);
+      console.log("camera handleVisionExpertsRes:", handleVisionExpertsRes);
 
-      // const cameraTypes = {
-      //   // exercise: {
-      //   //   message: userAssistantContentExercise(response),
-      //   // },
-      //   nutrition: {
-      //     message: userAssistantContentNutrition(response),
-      //   },
-      // };
-
-      // message = cameraTypes[cameraType].message;
-      // console.log("message", message);
-      // esto activa el flujo con el agente de openai que llama a las apis
-      // assistantRes = await handleNewMessage(threadId, assistantId, message);
-      // console.log("Respuesta recibida del LLM VISION", assistantRes);
-      socket.emit(
-        "camera",
-        // message: assistantRes.messages.data[0].content[0].text.value,
-        response.ImageAnalysisResponse
-        // components: [],
-      );
-
-      // console.log("Respuesta del LLM enviada al cliente", {
-      //   // message: assistantRes.messages.data[0].content[0].text.value,
-      //   message: response,
-      //   // components: assistantRes.components,
-      //   timestamp: Date.now(),
-      // });
+      socket.emit("camera", handleVisionExpertsRes);
     } catch (error) {
-      console.log(
-        "Error comunicándose con LLM:",
-        error?.response?.data?.error
-          ? error.response?.data?.error
-          : error.response?.data
-          ? error.response.data
-          : error
-      );
+      console.log("Error en el procesamiento:", error);
+      socket.emit("camera", {
+        error: "Error en el procesamiento de la imagen.",
+      });
     }
     console.timeEnd("socket.on camera");
   });

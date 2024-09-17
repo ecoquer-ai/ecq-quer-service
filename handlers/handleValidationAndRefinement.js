@@ -1,22 +1,27 @@
+const { systemPromptStep2, userPromptStep2 } = require("../utils/prompts");
 const { openAi } = require("../utils/instances");
-const { systemPromptStep1, userPromptStep1 } = require("../utils/prompts");
 
-const handleVisionExperts = async (base64Image) => {
-  console.time("handleVisionExperts");
+const handleValidationAndRefinement = async (
+  base64Image,
+  width,
+  height,
+  initialDetection
+) => {
+  console.time("handleValidationAndRefinement");
   try {
     const response = await openAi.post("/chat/completions", {
       model: "gpt-4o-mini",
       messages: [
         {
           role: "system",
-          content: systemPromptStep1,
+          content: systemPromptStep2(width, height),
         },
         {
           role: "user",
           content: [
             {
               type: "text",
-              text: userPromptStep1,
+              text: userPromptStep2(initialDetection),
             },
             {
               type: "image_url",
@@ -38,20 +43,20 @@ const handleVisionExperts = async (base64Image) => {
       )
     );
 
-    console.log("handleVisionExperts analisysDescription", analisysDescription);
-    console.log("handleVisionExperts data", data);
-    return {
-      analisysDescription,
-      data,
-      from: `handleVisionExperts`,
-    };
+    console.log(
+      "handleValidationAndRefinement analisysDescription",
+      analisysDescription
+    );
+    console.log("handleValidationAndRefinement data", data);
+
+    return { analisysDescription, data, from: `handleValidationAndRefinement` };
   } catch (error) {
     console.error(
-      "Error al enviar imagen a OpenAI (handleVisionExperts):",
+      "Error al enviar imagen a OpenAI (handleValidationAndRefinement):",
       error
     );
   }
-  console.timeEnd("handleVisionExperts");
+  console.timeEnd("handleValidationAndRefinement");
 };
 
-module.exports = { handleVisionExperts };
+module.exports = { handleValidationAndRefinement };
