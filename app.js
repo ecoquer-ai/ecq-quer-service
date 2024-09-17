@@ -145,13 +145,30 @@ io.on("connection", (socket) => {
       base64Image.slice(0, 50)
     );
 
+    const imageSizeInBytes = Buffer.byteLength(base64Image, "base64");
+    const imageSizeInKB = imageSizeInBytes / 1024;
+    const imageSizeInMB = imageSizeInKB / 1024;
+
+    console.log(
+      `Tamaño de la imagen recibida: ${imageSizeInBytes} bytes (${imageSizeInKB.toFixed(
+        2
+      )} KB, ${imageSizeInMB.toFixed(2)} MB)`
+    );
+
     try {
-      // Paso 1: Detección Inicial
       const handleVisionExpertsRes = await handleVisionExperts(base64Image);
-      console.log("camera handleVisionExpertsRes:", handleVisionExpertsRes);
+      console.log(
+        "socket camera handleVisionExpertsRes:",
+        handleVisionExpertsRes
+      );
 
       socket.emit("camera", handleVisionExpertsRes);
     } catch (error) {
+      socket.emit("camera", {
+        error: "Error en el procesamiento de la imagen.",
+        data: [],
+        analisysDescription: "Ups, no pude procesar la imagen.",
+      });
       console.log("Error en el procesamiento:", error);
       socket.emit("camera", {
         error: "Error en el procesamiento de la imagen.",

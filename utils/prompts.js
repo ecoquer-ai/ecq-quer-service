@@ -18,6 +18,7 @@ Para cada tipo de alimento, debes proporcionar la estructura de datos correspond
 
 IMPORTANTE:
 RETORNAR SOLO RESPUESTAS EN FORMATO JSON. NO DEVOLVER TEXTO PLANO, APEGARSE A LA ESTRUCTURA DE DATOS SOLICITADA.
+SI IDENTIFICAS UN ALIMENTO SIEMPRE DEBES ENVIAR SU INFORMACIÓN NUTRICIONAL, AUNQUE SEA UNA INSTANCIA.
 Devuelve la respuesta en formato JSON siguiendo esta estructura:
 
 {
